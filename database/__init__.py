@@ -3,7 +3,7 @@ import copy
 import json
 from pymongo import MongoClient
 
-mongua = MongoClient()
+mongua = MongoClient(host="mongodbservice",port=27017)
 
 
 def next_id(name):

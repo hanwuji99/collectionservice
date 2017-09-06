@@ -10,7 +10,7 @@ class Cache(object):
         pass
 
 class RedisCache(Cache):
-    redis_db = redis.StrictRedis(host='localhost', port=6379, db=0)
+    redis_db = redis.StrictRedis(host='redisservice', port=6379, db=0)
 
     def set(self, key, value):
         return RedisCache.redis_db.set(key, value)
