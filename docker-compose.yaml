@@ -14,7 +14,7 @@ services:
       - "5004:5004"
     expose:
       - "5004"
-#    restart:  always
+    restart:  always
   mongodbservice:
     image: mongo
     container_name: mongodb_container
