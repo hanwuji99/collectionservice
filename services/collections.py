@@ -29,7 +29,7 @@ def add():
 
 @app.route('/all')
 def all():
-    cs = Collections.all()
+    # cs = Collections.all()
     # rediscache
     cs = Collections.cache_all()
     cs = [i.json() for i in cs]
