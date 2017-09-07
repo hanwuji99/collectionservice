@@ -20,8 +20,6 @@ services:
     container_name: mongodb_container
     ports:
       - "27017:27017"
-#    expose:
-#      - "27017"
     restart:  always
   redisservice:
     image: redis:alpine

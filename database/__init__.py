@@ -36,6 +36,17 @@ class Mongua(object):
         ('updated_time', int, 0),
     ]
 
+    def blacklist(self):
+        b = [
+            '_id',
+        ]
+        return b
+
+    def json(self):
+        _dict = self.__dict__
+        d = {k: v for k, v in _dict.items() if k not in self.blacklist()}
+        return d
+
     @classmethod
     def new(cls, form=None, **kwargs):
         name = cls.__name__
@@ -68,13 +79,12 @@ class Mongua(object):
         mongua.db[name].save(self.__dict__)
 
     @classmethod
-    def delete(cls,id):
-        name = cls.__class__.__name__
+    def delete(cls, id):
+        name = cls.__name__
         query = {
-            'id': id,
+            'id': id
         }
-        mongua.db[name].delete_one(query)
-        # print mongua.db[name]
+        mongua.db[name].remove(query)
 
     @classmethod
     def all(cls):
@@ -106,6 +116,20 @@ class Mongua(object):
         m.type = cls.__name__.lower()
         return m
 
-    # def to_json(self):
-    #     d = self.__dict__.copy()
-    #     return json.dumps(d)
+    @classmethod
+    def find_by(cls, **kwargs):
+        return cls.find_one(**kwargs)
+
+    @classmethod
+    def find_one(cls, **kwargs):
+        l = cls._find(**kwargs)
+        if len(l) > 0:
+            return l[0]
+        else:
+            return None
+
+    @classmethod
+    def clean(cls):
+        name = cls.__name__
+        mongua.db[name].remove()
+

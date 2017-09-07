@@ -27,7 +27,6 @@ class Collections(Mongua):
     ]
 
     def to_json(self):
-        # return (json.dumps(self, default=lambda obj: obj.__dict__))
         d = dict()
         for k in Collections.__fields__:
             key = k[0]
