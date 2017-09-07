@@ -56,6 +56,12 @@ class Collections(Mongua):
         if Collections.should_update_all:
             Collections.redis_cache.set('Collections_all', json.dumps([i.to_json() for i in cls.all_delay()]))
             Collections.should_update_all = False
-        j = json.loads(Collections.redis_cache.get('Collections_all').decode('utf-8'))
-        j = [Collections.from_json(i) for i in j]
-        return j
+        try:
+            j = json.loads(Collections.redis_cache.get('Collections_all'))
+            j = [Collections.from_json(i) for i in j]
+            return j
+        except Exception as e:
+            print e
+
+
+
