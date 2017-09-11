@@ -24,7 +24,7 @@ services:
       - "27017"
     restart:  always
   redisservice:
-    image: redis:alpine
+    image: webhippie/redis
     container_name: redis-servre_container
     ports:
       - "6379:6379"
