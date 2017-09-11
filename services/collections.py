@@ -31,6 +31,7 @@ def add():
 def all():
     # cs = Collections.all()
     # rediscache
+    Collections.should_update_all()
     cs = Collections.cache_all()
     cs = [i.json() for i in cs]
     return nice_json(cs)
